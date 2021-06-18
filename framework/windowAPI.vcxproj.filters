@@ -55,6 +55,12 @@
     <Filter Include="playGround\player">
       <UniqueIdentifier>{a8056221-b438-46bb-926a-95180681c838}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\HyuongJunKim">
+      <UniqueIdentifier>{e5293811-d2df-41a9-8cb5-a289eb55b52d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\HyuongJunKim\Enemy">
+      <UniqueIdentifier>{e609021a-1870-4afc-825e-6eec8fd25241}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -135,6 +141,18 @@
     <ClInclude Include="player.h">
       <Filter>playGround\player</Filter>
     </ClInclude>
+    <ClInclude Include="Enemy_Basic.h">
+      <Filter>playGround\HyuongJunKim\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="enemyManager.h">
+      <Filter>playGround\HyuongJunKim\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="stage.h">
+      <Filter>playGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Team_TestScene.h">
+      <Filter>playGround</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -202,6 +220,18 @@
     </ClCompile>
     <ClCompile Include="player.cpp">
       <Filter>playGround\player</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy_Basic.cpp">
+      <Filter>playGround\HyuongJunKim\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="enemyManager.cpp">
+      <Filter>playGround\HyuongJunKim\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="stage.cpp">
+      <Filter>playGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Team_TestScene.cpp">
+      <Filter>playGround</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
