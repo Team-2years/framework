@@ -55,6 +55,9 @@
     <Filter Include="playGround\player">
       <UniqueIdentifier>{a8056221-b438-46bb-926a-95180681c838}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\player\state">
+      <UniqueIdentifier>{d6683949-5038-4c72-b411-fde876e76025}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -135,6 +138,12 @@
     <ClInclude Include="player.h">
       <Filter>playGround\player</Filter>
     </ClInclude>
+    <ClInclude Include="state.h">
+      <Filter>playGround\player\state</Filter>
+    </ClInclude>
+    <ClInclude Include="walkState.h">
+      <Filter>playGround\player\state</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -202,6 +211,12 @@
     </ClCompile>
     <ClCompile Include="player.cpp">
       <Filter>playGround\player</Filter>
+    </ClCompile>
+    <ClCompile Include="state.cpp">
+      <Filter>playGround\player\state</Filter>
+    </ClCompile>
+    <ClCompile Include="walkState.cpp">
+      <Filter>playGround\player\state</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
