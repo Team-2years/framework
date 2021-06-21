@@ -17,6 +17,7 @@ HRESULT playGround::init()
 	gameNode::init(true);
 	
 	IMAGEMANAGER->addImage("¹è°æ", "background.bmp", 1200, 900, true, RGB(255, 0, 255));
+	
 	_player = new player;
 	_player->init();
 	return S_OK;

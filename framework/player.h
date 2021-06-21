@@ -13,6 +13,8 @@ private:
 	float _jumpPower;
 	bool _isJump;
 	int _time;
+	bool _cantMove;
+	int _frameY;
 public:
 
 	HRESULT init();

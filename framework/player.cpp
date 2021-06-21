@@ -5,8 +5,9 @@ HRESULT player::init()
 {
 	IMAGEMANAGER->addFrameImage("캐릭터무브", "characterMove.bmp", 492, 134, 12, 2, true, RGB(255, 0, 255), true);
 	_player = IMAGEMANAGER->findImage("캐릭터무브");
+	IMAGEMANAGER->addFrameImage("쿄코발차기", "KyokoKick.bmp", 3190, 142, 22, 2, true, RGB(255, 0, 255),true);
 	_player->setFrameX(0);
-	_player->setFrameY(0);
+	_frameY = 0;
 	_direction = false;
 	_state = 0;
 	_x = 400.0f;
@@ -17,6 +18,7 @@ HRESULT player::init()
 	_isJump = false;
 	_jumpPower = 0.f;
 	_time = 0;
+	_cantMove = false;
 	return S_OK;
 }
 
@@ -28,10 +30,10 @@ void player::release()
 void player::update()
 {
 	_time++;
-	if (KEYMANAGER->isStayKeyDown(VK_LEFT))
+	if (!_cantMove && KEYMANAGER->isStayKeyDown(VK_LEFT))
 	{
 		_direction = true;
-		_player->setFrameY(0);
+		_frameY = 0;
 		_isMove = true;
 		_x -= 3.0f;
 		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), _x-_player->getFrameWidth()*0.5, _y);
@@ -44,14 +46,14 @@ void player::update()
 			_x += 3.0f;
 		}
 	}
-	if (KEYMANAGER->isOnceKeyUp(VK_LEFT))
+	if (!_cantMove && KEYMANAGER->isOnceKeyUp(VK_LEFT))
 	{
 		_isMove = false;
 	}
-	if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
+	if (!_cantMove && KEYMANAGER->isStayKeyDown(VK_RIGHT))
 	{
 		_direction = false;
-		_player->setFrameY(1);
+		_frameY = 1;
 		_isMove = true;
 		_x += 3.0f;
 		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), _x+_player->getFrameWidth()*0.5, _y);
@@ -64,11 +66,11 @@ void player::update()
 			_x -= 3.0f;
 		}
 	}
-	if (KEYMANAGER->isOnceKeyUp(VK_RIGHT))
+	if (!_cantMove && KEYMANAGER->isOnceKeyUp(VK_RIGHT))
 	{
 		_isMove = false;
 	}
-	if (KEYMANAGER->isStayKeyDown(VK_UP))
+	if (!_cantMove && KEYMANAGER->isStayKeyDown(VK_UP))
 	{
 		_y -= 3.0f;
 
@@ -83,11 +85,11 @@ void player::update()
 		}
 		_isMove = true;
 	}
-	if (KEYMANAGER->isOnceKeyUp(VK_UP))
+	if (!_cantMove && KEYMANAGER->isOnceKeyUp(VK_UP))
 	{
 		_isMove = false;
 	}
-	if (KEYMANAGER->isStayKeyDown(VK_DOWN))
+	if (!_cantMove && KEYMANAGER->isStayKeyDown(VK_DOWN))
 	{
 		_y += 3.0f;
 		_isMove = true;
@@ -101,11 +103,17 @@ void player::update()
 			_y -= 3.0f;
 		}
 	}
-	if (KEYMANAGER->isOnceKeyUp(VK_DOWN))
+	if (!_cantMove && KEYMANAGER->isOnceKeyUp(VK_DOWN))
 	{
 		_isMove = false;
 	}
-	if (!_isJump && KEYMANAGER->isStayKeyDown('D'))
+	if (KEYMANAGER->isOnceKeyDown('A') && !_cantMove)
+	{
+		_cantMove = true;
+		_player = IMAGEMANAGER->findImage("쿄코발차기");
+		_player->setFrameX(0);
+	}
+	if (!_cantMove && !_isJump && KEYMANAGER->isStayKeyDown('D'))
 	{
 		_jumpPower = 7.0f;
 		_z += _jumpPower;
@@ -123,6 +131,20 @@ void player::update()
 			_isJump = false;
 		}
 	}
+	if (_cantMove)
+	{
+		_isMove = false;
+		if (_time % 5 == 3)
+		{
+			_player->setFrameX(_player->getFrameX() + 1);
+			if (_player->getFrameX() == 21)
+			{
+				_cantMove = false;
+				_player = IMAGEMANAGER->findImage("캐릭터무브");
+				_player->setFrameX(0);
+			}
+		}
+	}
 	if (_isMove)
 	{
 		if (_time % 5 == 4)
@@ -132,7 +154,7 @@ void player::update()
 				_player->setFrameX(1);
 		}
 	}
-	else
+	else if (!_cantMove)
 		_player->setFrameX(0);
 }
 
@@ -141,5 +163,7 @@ void player::render()
 	EllipseMakeCenter(getMemDC(), _x, _y, 60, 30);
 	_player->frameRender(getMemDC(),
 		_x - _player->getFrameWidth() * 0.5,
-		_y - _player->getFrameHeight() - _z);
+		_y - _player->getFrameHeight() - _z,
+		_player->getFrameX(),
+		_frameY);
 }
