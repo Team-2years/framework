@@ -1,14 +1,13 @@
 #pragma once
 #include "gameNode.h"
-
+#include "TestScene.h"
 
 
 
 class playGround : public gameNode
 {
 private:
-	char* _str;
-	int _test;
+
 
 public:
 	playGround();

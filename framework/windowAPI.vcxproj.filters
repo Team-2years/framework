@@ -52,6 +52,12 @@
     <Filter Include="2DGameFramework\action">
       <UniqueIdentifier>{936fa078-09d7-4d41-8553-9de447d9f438}</UniqueIdentifier>
     </Filter>
+    <Filter Include="playGround\SCENEN">
+      <UniqueIdentifier>{938854c1-732d-4507-b29e-d6f8363ae565}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="playGround\PLAYER">
+      <UniqueIdentifier>{83f2f7aa-f632-4e38-a727-7afbf47b1a8c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -129,6 +135,12 @@
     <ClInclude Include="iniDataManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>playGround\PLAYER</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>playGround\SCENEN</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -193,6 +205,12 @@
     </ClCompile>
     <ClCompile Include="iniDataManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>playGround\PLAYER</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>playGround\SCENEN</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

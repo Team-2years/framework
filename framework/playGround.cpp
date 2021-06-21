@@ -1,6 +1,10 @@
 #include "stdafx.h"
 #include "playGround.h"
 
+#include <iostream>
+#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console")
+using namespace std;
+
 
 playGround::playGround()
 {
@@ -15,7 +19,8 @@ playGround::~playGround()
 HRESULT playGround::init()
 {
 	gameNode::init(true);
-
+	SCENEMANAGER->addScene("테스트씬", new TestScene);
+	SCENEMANAGER->changeScene("테스트씬");
 	return S_OK;
 }
 
@@ -23,15 +28,13 @@ HRESULT playGround::init()
 void playGround::release()
 {
 	gameNode::release();
-
-
 }
 
 
 void playGround::update()
 {
 	gameNode::update();
-
+	SCENEMANAGER->update();
 	
 }
 
@@ -43,7 +46,7 @@ void playGround::render()
 	//================제발 이 사이에 좀 그립시다==========================
 	SetTextColor(getMemDC(), RGB(0, 0, 0));
 	
-
+	SCENEMANAGER->render();
 
 	TIMEMANAGER->render(getMemDC());
 	//==================================================
