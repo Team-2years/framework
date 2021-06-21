@@ -2,15 +2,16 @@
 #include "state.h"
 
 class player;
-class walkState : public state
+
+class idleState : public state
 {
 private:
 	player* _player;
-
 public:
 	virtual state* inputHandle(player* player);
 	virtual void enter(player* player);
 	virtual void update(player * player);
-	virtual void exit();
+	virtual void exit(player * player);
+
 };
 
