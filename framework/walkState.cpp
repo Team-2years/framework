@@ -8,12 +8,15 @@ state * walkState::inputHandle(player * player)
 
 void walkState::enter(player * player)
 {
+
 }
 
 void walkState::update(player * player)
 {
+
 }
 
-void walkState::exit(player * player)
+void walkState::exit()
 {
+
 }

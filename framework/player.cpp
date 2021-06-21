@@ -9,9 +9,9 @@ HRESULT player::init()
 	_player->setFrameY(0);
 	_direction = false;
 	_state = 0;
-	_playerX = 400.0f;
-	_playerY = 800.0f;
-	_playerZ = 0.f;
+	_x = 400.0f;
+	_y = 800.0f;
+	_z = 0.f;
 	_gravity = 0.25f;
 	_isMove = false;
 	_isJump = false;
@@ -33,15 +33,15 @@ void player::update()
 		_direction = true;
 		_player->setFrameY(0);
 		_isMove = true;
-		_playerX -= 3.0f;
-		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), _playerX-_player->getFrameWidth()*0.5, _playerY);
+		_x -= 3.0f;
+		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), _x-_player->getFrameWidth()*0.5, _y);
 		int r = GetRValue(color);
 		int g = GetGValue(color);
 		int b = GetBValue(color);
 
 		if (!(r == 255 && g == 0 && b == 255))
 		{
-			_playerX += 3.0f;
+			_x += 3.0f;
 		}
 	}
 	if (KEYMANAGER->isOnceKeyUp(VK_LEFT))
@@ -53,15 +53,15 @@ void player::update()
 		_direction = false;
 		_player->setFrameY(1);
 		_isMove = true;
-		_playerX += 3.0f;
-		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), _playerX+_player->getFrameWidth()*0.5, _playerY);
+		_x += 3.0f;
+		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), _x+_player->getFrameWidth()*0.5, _y);
 		int r = GetRValue(color);
 		int g = GetGValue(color);
 		int b = GetBValue(color);
 
 		if (!(r == 255 && g == 0 && b == 255))
 		{
-			_playerX -= 3.0f;
+			_x -= 3.0f;
 		}
 	}
 	if (KEYMANAGER->isOnceKeyUp(VK_RIGHT))
@@ -70,59 +70,58 @@ void player::update()
 	}
 	if (KEYMANAGER->isStayKeyDown(VK_UP))
 	{
-		_playerY -= 3.0f;
+		_y -= 3.0f;
 
-		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), _playerX, _playerY);
+		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), _x, _y);
 		int r = GetRValue(color);
 		int g = GetGValue(color);
 		int b = GetBValue(color);
 
 		if (!(r == 255 && g == 0 && b == 255))
 		{
-			_playerY += 3.0f;
+			_y += 3.0f;
 		}
 		_isMove = true;
-	}
-	if (KEYMANAGER->isStayKeyDown(VK_DOWN))
-	{
-		_playerY += 3.0f;
-		_isMove = true;
-		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), _playerX, _playerY);
-		int r = GetRValue(color);
-		int g = GetGValue(color);
-		int b = GetBValue(color);
-
-		if (!(r == 255 && g == 0 && b == 255))
-		{
-			_playerY -= 3.0f;
-		}
-
 	}
 	if (KEYMANAGER->isOnceKeyUp(VK_UP))
 	{
 		_isMove = false;
 	}
+	if (KEYMANAGER->isStayKeyDown(VK_DOWN))
+	{
+		_y += 3.0f;
+		_isMove = true;
+		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), _x, _y);
+		int r = GetRValue(color);
+		int g = GetGValue(color);
+		int b = GetBValue(color);
+
+		if (!(r == 255 && g == 0 && b == 255))
+		{
+			_y -= 3.0f;
+		}
+	}
 	if (KEYMANAGER->isOnceKeyUp(VK_DOWN))
 	{
 		_isMove = false;
 	}
-	if (KEYMANAGER->isOnceKeyDown(VK_SPACE))
+	if (!_isJump && KEYMANAGER->isStayKeyDown('D'))
 	{
 		_jumpPower = 7.0f;
-		_playerZ += _jumpPower;
+		_z += _jumpPower;
 		_jumpPower -= _gravity;
 		_isJump = true;
 	}
 	if (_isJump)
 	{
-		_playerZ += _jumpPower;
+		_z += _jumpPower;
 		_jumpPower -= _gravity;
-		if (_playerY - _playerZ > _playerY)
+		if (_y - _z > _y)
 		{
-			_playerZ = 0.f;
+			_z = 0.f;
+			_jumpPower = 0.f;
 			_isJump = false;
 		}
-
 	}
 	if (_isMove)
 	{
@@ -139,8 +138,8 @@ void player::update()
 
 void player::render()
 {
-	EllipseMakeCenter(getMemDC(), _playerX, _playerY, 60, 30);
+	EllipseMakeCenter(getMemDC(), _x, _y, 60, 30);
 	_player->frameRender(getMemDC(),
-		_playerX - _player->getFrameWidth()*0.5,
-		_playerY - _player->getFrameHeight() - _playerZ);
+		_x - _player->getFrameWidth() * 0.5,
+		_y - _player->getFrameHeight() - _z);
 }
