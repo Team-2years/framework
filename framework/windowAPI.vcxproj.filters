@@ -138,6 +138,15 @@
     <ClInclude Include="walkState.h">
       <Filter>playGround\player\state</Filter>
     </ClInclude>
+    <ClInclude Include="idleState.h">
+      <Filter>playGround\player\state</Filter>
+    </ClInclude>
+    <ClInclude Include="attackState.h">
+      <Filter>playGround\player\state</Filter>
+    </ClInclude>
+    <ClInclude Include="runState.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -208,6 +217,15 @@
     </ClCompile>
     <ClCompile Include="walkState.cpp">
       <Filter>playGround\player\state</Filter>
+    </ClCompile>
+    <ClCompile Include="idleState.cpp">
+      <Filter>playGround\player\state</Filter>
+    </ClCompile>
+    <ClCompile Include="attackState.cpp">
+      <Filter>playGround\player\state</Filter>
+    </ClCompile>
+    <ClCompile Include="runState.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

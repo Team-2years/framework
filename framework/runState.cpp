@@ -1,11 +1,11 @@
 #include "stdafx.h"
-#include "walkState.h"
+#include "runState.h"
 #include "idleState.h"
 #include "attackState.h"
 #include "player.h"
 
-state * walkState::inputHandle(player * player)
-{	
+state * runState::inputHandle(player * player)
+{
 	if (KEYMANAGER->isOnceKeyUp(VK_LEFT))
 	{
 		player->setSpeed(0.0f);
@@ -33,14 +33,14 @@ state * walkState::inputHandle(player * player)
 	return nullptr;
 }
 
-void walkState::enter(player * player)
+void runState::enter(player * player)
 {
-	player->setImage(IMAGEMANAGER->findImage("캐릭터무브"));
+	player->setImage(IMAGEMANAGER->findImage("캐릭터달리기"));
 	player->setFrameX(0);
 	player->setTime(0);
 }
 
-void walkState::update(player * player)
+void runState::update(player * player)
 {
 	if (KEYMANAGER->isStayKeyDown(VK_LEFT))
 	{
@@ -52,7 +52,7 @@ void walkState::update(player * player)
 
 		if (!(r == 255 && g == 0 && b == 255))
 		{
-			player->setX(player->getX()+ player->getSpeed());
+			player->setX(player->getX() + player->getSpeed());
 		}
 	}
 	if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
@@ -95,15 +95,14 @@ void walkState::update(player * player)
 			player->setY(player->getY() - player->getSpeed());
 		}
 	}
-	if (player->getTime() % 5 == 4)
+	if (player->getTime() % 3 == 2)
 	{
 		player->setFrameX(player->getFrameX() + 1);
-		if (player->getFrameX() >= player->getImage()->getMaxFrameX())
+		if (player->getFrameX() > player->getImage()->getMaxFrameX())
 			player->setFrameX(0);
 	}
 }
 
-void walkState::exit(player * player)
+void runState::exit(player * player)
 {
-
 }
