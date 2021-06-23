@@ -1,34 +1,20 @@
 #include "stdafx.h"
 #include "runState.h"
 #include "idleState.h"
-#include "attackState.h"
+#include "skillState.h"
 #include "player.h"
 
 state * runState::inputHandle(player * player)
 {
-	if (KEYMANAGER->isOnceKeyUp(VK_LEFT))
+	if (!_leftMove && !_rightMove && !_upMove && !_downMove)
 	{
 		player->setSpeed(0.0f);
 		return new idleState;
 	}
-	if (KEYMANAGER->isOnceKeyUp(VK_RIGHT))
+	if (KEYMANAGER->isOnceKeyDown('Z'))
 	{
 		player->setSpeed(0.0f);
-		return new idleState;
-	}
-	if (KEYMANAGER->isOnceKeyUp(VK_UP))
-	{
-		player->setSpeed(0.0f);
-		return new idleState;
-	}
-	if (KEYMANAGER->isOnceKeyUp(VK_DOWN))
-	{
-		player->setSpeed(0.0f);
-		return new idleState;
-	}
-	if (KEYMANAGER->isOnceKeyDown('A'))
-	{
-		return new attackState;
+		return new skillState;
 	}
 	return nullptr;
 }
@@ -44,8 +30,19 @@ void runState::update(player * player)
 {
 	if (KEYMANAGER->isStayKeyDown(VK_LEFT))
 	{
+		_leftMove = true;
+
+	}
+	if (KEYMANAGER->isOnceKeyUp(VK_LEFT))
+	{
+		_leftMove = false;
+	}
+	if (_leftMove)
+	{
+		if (player->getFrameY() == 0)
+			player->setFrameY(1);
 		player->setX(player->getX() - player->getSpeed());
-		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), player->getX() - player->getImage()->getFrameWidth()*0.5, player->getY());
+		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), player->getX(), player->getY());
 		int r = GetRValue(color);
 		int g = GetGValue(color);
 		int b = GetBValue(color);
@@ -57,8 +54,18 @@ void runState::update(player * player)
 	}
 	if (KEYMANAGER->isStayKeyDown(VK_RIGHT))
 	{
+		_rightMove = true;
+	}
+	if (KEYMANAGER->isOnceKeyUp(VK_RIGHT))
+	{
+		_rightMove = false;
+	}
+	if (_rightMove)
+	{
+		if (player->getFrameY() == 1)
+			player->setFrameY(0);
 		player->setX(player->getX() + player->getSpeed());
-		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), player->getX() - player->getImage()->getFrameWidth()*0.5, player->getY());
+		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), player->getX(), player->getY());
 		int r = GetRValue(color);
 		int g = GetGValue(color);
 		int b = GetBValue(color);
@@ -70,9 +77,17 @@ void runState::update(player * player)
 	}
 	if (KEYMANAGER->isStayKeyDown(VK_UP))
 	{
+		_upMove = true;
+	}
+	if (KEYMANAGER->isOnceKeyUp(VK_UP))
+	{
+		_upMove = false;
+	}
+	if (_upMove)
+	{
 		player->setY(player->getY() - player->getSpeed());
 
-		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), player->getX() - player->getImage()->getFrameWidth()*0.5, player->getY());
+		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), player->getX(), player->getY());
 		int r = GetRValue(color);
 		int g = GetGValue(color);
 		int b = GetBValue(color);
@@ -84,8 +99,16 @@ void runState::update(player * player)
 	}
 	if (KEYMANAGER->isStayKeyDown(VK_DOWN))
 	{
+		_downMove = true;
+	}
+	if (KEYMANAGER->isOnceKeyUp(VK_DOWN))
+	{
+		_downMove = false;
+	}
+	if (_downMove)
+	{
 		player->setY(player->getY() + player->getSpeed());
-		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), player->getX() - player->getImage()->getFrameWidth()*0.5, player->getY());
+		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), player->getX(), player->getY());
 		int r = GetRValue(color);
 		int g = GetGValue(color);
 		int b = GetBValue(color);

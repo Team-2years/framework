@@ -3,10 +3,13 @@
 
 HRESULT player::init()
 {
-	IMAGEMANAGER->addFrameImage("캐릭터기본", "characterIdle.bmp", 444, 138, 12, 2, true, RGB(255, 0, 255), true);
-	IMAGEMANAGER->addFrameImage("캐릭터무브", "characterMove.bmp", 492, 134, 12, 2, true, RGB(255, 0, 255), true);
-	IMAGEMANAGER->addFrameImage("쿄코발차기", "KyokoKick.bmp", 3190, 142, 22, 2, true, RGB(255, 0, 255),true);
-	IMAGEMANAGER->addFrameImage("캐릭터달리기", "characterRun.bmp", 912, 128, 16, 2, true, RGB(255, 0, 255), true);
+	IMAGEMANAGER->addFrameImage("캐릭터기본", "characterIdle.bmp", 1332, 414, 12, 2, true, RGB(255, 0, 255), true);
+	IMAGEMANAGER->addFrameImage("캐릭터무브", "characterMove.bmp", 1476, 402, 12, 2, true, RGB(255, 0, 255), true);
+	IMAGEMANAGER->addFrameImage("쿄코발차기", "KyokoKick.bmp", 9570, 426, 22, 2, true, RGB(255, 0, 255),true);
+	IMAGEMANAGER->addFrameImage("캐릭터달리기", "characterRun.bmp", 2736, 384, 16, 2, true, RGB(255, 0, 255), true);
+	IMAGEMANAGER->addFrameImage("캐릭터콤보1", "characterCombo1.bmp", 1494, 390, 6, 2, true, RGB(255, 0, 255), true);
+	IMAGEMANAGER->addFrameImage("캐릭터콤보2", "characterCombo2.bmp", 1953, 396, 7, 2, true, RGB(255, 0, 255), true);
+	IMAGEMANAGER->addFrameImage("캐릭터콤보3", "characterCombo3.bmp", 4428, 414, 12, 2, true, RGB(255, 0, 255), true);
 	_state = new idleState;
 	_state->enter(this);
 	_player->setFrameX(0);
@@ -17,7 +20,7 @@ HRESULT player::init()
 	_y = 800.0f;
 	_z = 0.f;
 	_frameX = 0;
-	_gravity = 0.25f;
+	_gravity = 0.5f;
 	_isMove = false;
 	_isJump = false;
 	_jumpPower = 0.f;
@@ -42,7 +45,7 @@ void player::update()
 		_moveCommandInput--;
 	if (!_cantMove && !_isJump && KEYMANAGER->isStayKeyDown('D'))
 	{
-		_jumpPower = 7.0f;
+		_jumpPower = 12.0f;
 		_z += _jumpPower;
 		_jumpPower -= _gravity;
 		_isJump = true;
@@ -64,7 +67,7 @@ void player::update()
 
 void player::render()
 {
-	EllipseMakeCenter(getMemDC(), _x, _y, 60, 30);
+	EllipseMakeCenter(getMemDC(), _x, _y, 90, 45);
 	_player->frameRender(getMemDC(),
 		_x - _player->getFrameWidth() * 0.5,
 		_y - _player->getFrameHeight() - _z,

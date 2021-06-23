@@ -141,11 +141,14 @@
     <ClInclude Include="idleState.h">
       <Filter>playGround\player\state</Filter>
     </ClInclude>
-    <ClInclude Include="attackState.h">
+    <ClInclude Include="runState.h">
       <Filter>playGround\player\state</Filter>
     </ClInclude>
-    <ClInclude Include="runState.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="skillState.h">
+      <Filter>playGround\player\state</Filter>
+    </ClInclude>
+    <ClInclude Include="comboState.h">
+      <Filter>playGround\player\state</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -221,11 +224,14 @@
     <ClCompile Include="idleState.cpp">
       <Filter>playGround\player\state</Filter>
     </ClCompile>
-    <ClCompile Include="attackState.cpp">
+    <ClCompile Include="runState.cpp">
       <Filter>playGround\player\state</Filter>
     </ClCompile>
-    <ClCompile Include="runState.cpp">
-      <Filter>소스 파일</Filter>
+    <ClCompile Include="skillState.cpp">
+      <Filter>playGround\player\state</Filter>
+    </ClCompile>
+    <ClCompile Include="comboState.cpp">
+      <Filter>playGround\player\state</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

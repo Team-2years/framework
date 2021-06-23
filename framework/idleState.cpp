@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "idleState.h"
 #include "walkState.h"
-#include "attackState.h"
+#include "skillState.h"
 #include "runState.h"
+#include "comboState.h"
 #include "player.h"
 
 state * idleState::inputHandle(player * player)
@@ -43,9 +44,13 @@ state * idleState::inputHandle(player * player)
 		player->setSpeed(3.0f);
 		return new walkState;
 	}
+	if (KEYMANAGER->isOnceKeyDown('Z'))
+	{
+		return new skillState;
+	}
 	if (KEYMANAGER->isOnceKeyDown('A'))
 	{
-		return new attackState;
+		return new comboState;
 	}
 	return nullptr;
 }
@@ -62,7 +67,7 @@ void idleState::update(player * player)
 	if (player->getFrameY() == 0)
 	{
 		player->setX(player->getX() + player->getSpeed());
-		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), player->getX() - player->getImage()->getFrameWidth()*0.5, player->getY());
+		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), player->getX(), player->getY());
 		int r = GetRValue(color);
 		int g = GetGValue(color);
 		int b = GetBValue(color);
@@ -75,7 +80,7 @@ void idleState::update(player * player)
 	if (player->getFrameY() == 1)
 	{
 		player->setX(player->getX() - player->getSpeed());
-		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), player->getX() - player->getImage()->getFrameWidth()*0.5, player->getY());
+		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), player->getX(), player->getY());
 		int r = GetRValue(color);
 		int g = GetGValue(color);
 		int b = GetBValue(color);

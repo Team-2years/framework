@@ -18,6 +18,8 @@ private:
 	int _frameY;
 	float _speed;
 	int _moveCommandInput;
+	int _attackCommandInput;
+	int _comboCount;
 public:
 
 	HRESULT init();

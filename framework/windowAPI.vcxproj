@@ -149,7 +149,8 @@
   <ItemGroup>
     <ClInclude Include="action.h" />
     <ClInclude Include="animation.h" />
-    <ClInclude Include="attackState.h" />
+    <ClInclude Include="comboState.h" />
+    <ClInclude Include="skillState.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="effect.h" />
     <ClInclude Include="effectManager.h" />
@@ -181,7 +182,8 @@
   <ItemGroup>
     <ClCompile Include="action.cpp" />
     <ClCompile Include="animation.cpp" />
-    <ClCompile Include="attackState.cpp" />
+    <ClCompile Include="comboState.cpp" />
+    <ClCompile Include="skillState.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />
     <ClCompile Include="gameNode.cpp" />
