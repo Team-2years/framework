@@ -4,6 +4,7 @@
 #include "skillState.h"
 #include "runState.h"
 #include "comboState.h"
+#include "strongAttackState.h"
 #include "player.h"
 
 state * idleState::inputHandle(player * player)
@@ -52,6 +53,10 @@ state * idleState::inputHandle(player * player)
 	{
 		return new comboState;
 	}
+	if (KEYMANAGER->isOnceKeyDown('S'))
+	{
+		return new strongAttackState;
+	}
 	return nullptr;
 }
 
@@ -60,6 +65,7 @@ void idleState::enter(player * player)
 	player->setImage(IMAGEMANAGER->findImage("캐릭터기본"));
 	player->setFrameX(0);
 	player->setTime(0);
+	player->setComboCount(0);
 }
 
 void idleState::update(player * player)

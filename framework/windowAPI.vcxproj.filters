@@ -150,6 +150,9 @@
     <ClInclude Include="comboState.h">
       <Filter>playGround\player\state</Filter>
     </ClInclude>
+    <ClInclude Include="strongAttackState.h">
+      <Filter>playGround\player\state</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -231,6 +234,9 @@
       <Filter>playGround\player\state</Filter>
     </ClCompile>
     <ClCompile Include="comboState.cpp">
+      <Filter>playGround\player\state</Filter>
+    </ClCompile>
+    <ClCompile Include="strongAttackState.cpp">
       <Filter>playGround\player\state</Filter>
     </ClCompile>
   </ItemGroup>

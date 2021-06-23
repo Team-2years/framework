@@ -26,25 +26,29 @@ public:
 	void release();
 	void update();
 	void render();
-	void setX(float x) { _x = x; };
-	void setY(float y) { _y = y; };
-	void setZ(float z) { _z = z; };
-	void setImage(image * image) { _player = image; };
-	void setFrameX(int x) { _frameX = x; };
-	void setFrameY(int y) { _frameY = y; };
-	void setJumpPower(float power) { _jumpPower = power; };
-	void setTime(int time) { _time = time; };
-	void setSpeed(int speed) { _speed = speed; };
-	void setMoveCommandInput(int input) { _moveCommandInput = input; };
-	float getX() { return _x; };
-	float getY() { return _y; };
-	float getZ() { return _z; };
-	int getTime() { return _time; };
-	int getFrameX() { return _frameX; };
-	int getFrameY() { return _frameY; };
-	float getSpeed() { return _speed; };
-	int getMoveCommandInput() { return _moveCommandInput; };
-	image* getImage() { return _player; };
+	void setX(float x) { _x = x; }
+	void setY(float y) { _y = y; }
+	void setZ(float z) { _z = z; }
+	void setImage(image * image) { _player = image; }
+	void setFrameX(int x) { _frameX = x; }
+	void setFrameY(int y) { _frameY = y; }
+	void setJumpPower(float power) { _jumpPower = power; }
+	void setTime(int time) { _time = time; }
+	void setSpeed(float speed) { _speed = speed; }
+	void setMoveCommandInput(int input) { _moveCommandInput = input; }
+	void setAttackCommandInput(int input) { _attackCommandInput = input; }
+	void setComboCount(int input) { _comboCount = input; }
+	float getX() { return _x; }
+	float getY() { return _y; }
+	float getZ() { return _z; }
+	int getTime() { return _time; }
+	int getFrameX() { return _frameX; }
+	int getFrameY() { return _frameY; }
+	float getSpeed() { return _speed; }
+	int getMoveCommandInput() { return _moveCommandInput; }
+	int getAttackCommandInput() { return _attackCommandInput; }
+	int getComboCount() { return _comboCount; }
+	image* getImage() { return _player; }
 	void inputHandle();
 };
 

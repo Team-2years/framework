@@ -2,6 +2,8 @@
 #include "walkState.h"
 #include "idleState.h"
 #include "skillState.h"
+#include "comboState.h"
+#include "strongAttackState.h"
 #include "player.h"
 
 state * walkState::inputHandle(player * player)
@@ -15,6 +17,16 @@ state * walkState::inputHandle(player * player)
 	{
 		player->setSpeed(0.0f);
 		return new skillState;
+	}
+	if (KEYMANAGER->isOnceKeyDown('A'))
+	{
+		player->setSpeed(0.0f);
+		return new comboState;
+	}
+	if (KEYMANAGER->isOnceKeyDown('S'))
+	{
+		player->setSpeed(0.0f);
+		return new strongAttackState;
 	}
 	return nullptr;
 }

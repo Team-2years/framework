@@ -10,6 +10,7 @@ HRESULT player::init()
 	IMAGEMANAGER->addFrameImage("캐릭터콤보1", "characterCombo1.bmp", 1494, 390, 6, 2, true, RGB(255, 0, 255), true);
 	IMAGEMANAGER->addFrameImage("캐릭터콤보2", "characterCombo2.bmp", 1953, 396, 7, 2, true, RGB(255, 0, 255), true);
 	IMAGEMANAGER->addFrameImage("캐릭터콤보3", "characterCombo3.bmp", 4428, 414, 12, 2, true, RGB(255, 0, 255), true);
+	IMAGEMANAGER->addFrameImage("캐릭터강공격", "characterStrongAttack.bmp", 3186, 474, 9, 2, true, RGB(255, 0, 255), true);
 	_state = new idleState;
 	_state->enter(this);
 	_player->setFrameX(0);
@@ -28,6 +29,8 @@ HRESULT player::init()
 	_cantMove = false;
 	_speed = 0.0f;
 	_moveCommandInput = 0;
+	_attackCommandInput = 0;
+	_comboCount = 0;
 	return S_OK;
 }
 
@@ -43,6 +46,8 @@ void player::update()
 	_time++;
 	if (_moveCommandInput > 0)
 		_moveCommandInput--;
+	if (_attackCommandInput > 0)
+		_attackCommandInput--;
 	if (!_cantMove && !_isJump && KEYMANAGER->isStayKeyDown('D'))
 	{
 		_jumpPower = 12.0f;
@@ -61,6 +66,7 @@ void player::update()
 			_isJump = false;
 		}
 	}
+
 	if (_time == 50)
 		_time = 1;
 }

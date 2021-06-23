@@ -22,7 +22,7 @@ void skillState::enter(player * player)
 
 void skillState::update(player * player)
 {
-	if (player->getTime() % 5 == 4)
+	if (player->getTime() % 3 == 2)
 	{
 		player->setFrameX(player->getFrameX() + 1);
 	}
