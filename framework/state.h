@@ -3,6 +3,7 @@
 
 class player;
 
+//상태의 정의
 class state : public gameNode
 {
 

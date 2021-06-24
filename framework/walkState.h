@@ -5,6 +5,7 @@ class player;
 class walkState : public state
 {
 private:
+	//불의 전사
 	bool _rightMove;
 	bool _leftMove;
 	bool _upMove;

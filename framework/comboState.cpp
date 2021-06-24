@@ -36,6 +36,9 @@ void comboState::update(player * player)
 	{
 		player->setFrameX(player->getPlayer().frameX + 1);
 	}
+
+	/*커맨드 입력 타이밍을 좀 널널하게 잡고 그 타이밍 안에 눌렀으면
+	마지막 동작 후에 자동으로 다음 콤보로 연결*/
 	switch (player->getPlayer().comboCount)
 	{
 	case 0:

@@ -5,23 +5,23 @@
 
 struct tagPlayer
 {
-	image* image;
-	state* state;
-	RECT collsionRect;
-	RECT attackRect;
-	float x, y, z;
-	float hp;
-	float gravity;
-	float jumpPower;
-	int time;
-	int frameX;
-	int frameY;
-	float speed;
-	int moveCommandInput;
-	int attackCommandInput;
-	int comboCount;
-	float collsionRcWidth;
-	float collsionRcHeight;
+	image* image;				//캐릭 이미지
+	state* state;				//상태
+	RECT collsionRect;			//충돌용 렉트
+	RECT attackRect;			//공격용 렉트
+	float x, y, z;				//좌표
+	float hp;					//피통
+	float gravity;				//점프 시 중력값
+	float jumpPower;			//점프력
+	int time;					//프레임 겸 여러가지
+	int frameX;					//프레임X
+	int frameY;					//프레임Y
+	float speed;				//스피드
+	int moveCommandInput;		//대시같은거 할때 n초안에 입력해야 나오게
+	int attackCommandInput;		//콤보같은거 할때 n초안에 입력해야 나오게
+	int comboCount;				//몇번커맨드 썼는지
+	float collsionRcWidth;		//이미지마다 렉트 크기 다르게 하려고 일단 만들어둠
+	float collsionRcHeight;		//이미지마다 렉트 크기 다르게 하려고 일단 만들어둠
 };
 class player : public gameNode
 {

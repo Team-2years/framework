@@ -47,12 +47,14 @@ void player::update()
 {
 	inputHandle();
 	_player.state->update(this);
+	//타임은 계속 올라가고 커맨드 입력시간은 줄임
 	_player.time++;
 	if (_player.moveCommandInput > 0)
 		_player.moveCommandInput--;
 	if (_player.attackCommandInput > 0)
 		_player.attackCommandInput--;
 
+	//일단 대충 콜리전 렉트
 	if (_player.image->getFrameWidth() > 100)
 		_player.collsionRcWidth = 100;
 	else
@@ -68,6 +70,7 @@ void player::update()
 		_player.y - _player.collsionRcHeight*0.5 -_player.z,
 		_player.collsionRcWidth,
 		_player.collsionRcHeight);
+
 	if (_player.time == 50)
 		_player.time = 1;
 	
@@ -89,6 +92,7 @@ void player::setAttackRect(float x, float y)
 	
 }
 
+//업데이트마다 상태가 바뀌는지 체크
 void player::inputHandle()
 {
 	state* tmpstate = _player.state->inputHandle(this);

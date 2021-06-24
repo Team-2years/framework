@@ -9,6 +9,8 @@
 
 state * walkState::inputHandle(player * player)
 {	
+	//키보드를 하나라도 떼면 idle로 가는걸 방지하기 위해
+	//불값으로 줘서 불값이 전부 false일 때 idle이 되도록
 	if (!_leftMove && !_rightMove && !_upMove && !_downMove)
 	{
 		player->setSpeed(0.0f);
@@ -43,12 +45,12 @@ void walkState::enter(player * player)
 	player->setTime(0);
 }
 
+//방향키를 stay하는 동안 불값 true 떼면 false
 void walkState::update(player * player)
 {
 	if (KEYMANAGER->isStayKeyDown(VK_LEFT))
 	{
 		_leftMove = true;
-	
 	}
 	if (KEYMANAGER->isOnceKeyUp(VK_LEFT))
 	{
