@@ -20,6 +20,8 @@ struct tagPlayer
 	int moveCommandInput;
 	int attackCommandInput;
 	int comboCount;
+	float collsionRcWidth;
+	float collsionRcHeight;
 };
 class player : public gameNode
 {

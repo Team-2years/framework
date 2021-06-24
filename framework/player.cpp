@@ -12,6 +12,7 @@ HRESULT player::init()
 	IMAGEMANAGER->addFrameImage("캐릭터콤보3", "KyokoCombo3.bmp", 4428, 414, 12, 2, true, RGB(255, 0, 255), true);
 	IMAGEMANAGER->addFrameImage("캐릭터강공격", "KyokoStrongAttack.bmp", 3186, 474, 9, 2, true, RGB(255, 0, 255), true);
 	IMAGEMANAGER->addFrameImage("캐릭터점프", "KyokoJump.bmp", 405, 420, 3, 2, true, RGB(255, 0, 255), true);
+	IMAGEMANAGER->addFrameImage("캐릭터점프강공격", "KyokoJumpStrongAttack.bmp", 1551, 522, 11, 2, true, RGB(255, 0, 255), true);
 	_player.state = new idleState;
 	_player.state->enter(this);
 	_player.image->setFrameX(0);
@@ -28,7 +29,12 @@ HRESULT player::init()
 	_player.moveCommandInput = 0;
 	_player.attackCommandInput = 0;
 	_player.comboCount = 0;
-	_player.collsionRect = RectMakeCenter(_player.x, _player.y - 105, 110, 210);
+	_player.collsionRcWidth = 110;
+	_player.collsionRcHeight = 210;
+	_player.collsionRect = RectMakeCenter(_player.x,
+		_player.y - 105,
+		_player.collsionRcWidth,
+		_player.collsionRcHeight);
 	return S_OK;
 }
 
@@ -46,8 +52,22 @@ void player::update()
 		_player.moveCommandInput--;
 	if (_player.attackCommandInput > 0)
 		_player.attackCommandInput--;
-	
-	_player.collsionRect = RectMakeCenter(_player.x, _player.y - 105-_player.z, 110, 210);
+
+	if (_player.image->getFrameWidth() > 100)
+		_player.collsionRcWidth = 100;
+	else
+		_player.collsionRcWidth = _player.image->getFrameWidth();
+
+	if (_player.image->getFrameHeight() > 190)
+		_player.collsionRcHeight = 190;
+	else
+		_player.collsionRcHeight = _player.image->getFrameHeight();
+
+	_player.collsionRect = RectMakeCenter(
+		_player.x, 
+		_player.y - _player.collsionRcHeight*0.5 -_player.z,
+		_player.collsionRcWidth,
+		_player.collsionRcHeight);
 	if (_player.time == 50)
 		_player.time = 1;
 	
