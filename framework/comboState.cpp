@@ -11,7 +11,7 @@ state * comboState::inputHandle(player * player)
 		return new idleState;
 	}
 	if (player->getPlayer().comboCount == 2 &&
-		player->getPlayer().time > 24 && 
+		player->getPlayer().time > 26 && 
 		player->getPlayer().time < 30 &&
 		KEYMANAGER->isOnceKeyDown('S'))
 	{
@@ -25,22 +25,30 @@ void comboState::enter(player * player)
 	player->setImage(IMAGEMANAGER->findImage("Ä³¸¯ÅÍÄÞº¸1"));
 	player->setFrameX(0);
 	player->setTime(0);
+	player->setSpeed(0.f);
 	player->setComboCount(0);
+	_comboOn = false;
 }
 
 void comboState::update(player * player)
 {
-	if (player->getPlayer().time % 4 == 1)
+	if (player->getPlayer().time % 4 == 3)
 	{
 		player->setFrameX(player->getPlayer().frameX + 1);
 	}
 	switch (player->getPlayer().comboCount)
 	{
 	case 0:
-		if (player->getPlayer().time > 7 &&
-			player->getPlayer().time < 25 &&
+		if (player->getPlayer().time > 4 &&
+			player->getPlayer().time < 19 &&
 			KEYMANAGER->isOnceKeyDown('A'))
 		{
+			_comboOn = true;
+		}
+		if (player->getPlayer().time == 19 &&
+			_comboOn)
+		{
+			_comboOn = false;
 			player->setImage(IMAGEMANAGER->findImage("Ä³¸¯ÅÍÄÞº¸2"));
 			player->setFrameX(0);
 			player->setTime(0);
@@ -49,9 +57,15 @@ void comboState::update(player * player)
 		break; 
 	case 1:
 		if (player->getPlayer().time > 11 &&
-			player->getPlayer().time < 29 &&
+			player->getPlayer().time < 23 &&
 			KEYMANAGER->isOnceKeyDown('A'))
+		{ 
+			_comboOn = true;
+		}
+		if (player->getPlayer().time == 23 &&
+			_comboOn)
 		{
+			_comboOn = false;
 			player->setImage(IMAGEMANAGER->findImage("Ä³¸¯ÅÍÄÞº¸3"));
 			player->setFrameX(0);
 			player->setTime(0);

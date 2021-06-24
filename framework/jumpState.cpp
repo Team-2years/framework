@@ -22,7 +22,7 @@ void jumpState::enter(player * player)
 
 	player->setFrameX(0);
 	player->setTime(0);
-	player->setJumpPower(12.0f);
+	player->setJumpPower(17.0f);
 }
 
 void jumpState::update(player * player)
@@ -30,9 +30,9 @@ void jumpState::update(player * player)
 	player->setZ(player->getPlayer().z + player->getPlayer().jumpPower);
 	player->setJumpPower(player->getPlayer().jumpPower - player->getPlayer().gravity);
 
-	if (player->getPlayer().jumpPower < -5.f)
+	if (player->getPlayer().jumpPower < -3.f)
 		player->setFrameX(2);
-	else if (player->getPlayer().jumpPower < 4)
+	else if (player->getPlayer().jumpPower < 1)
 		player->setFrameX(1);
 	else
 		player->setFrameX(0);

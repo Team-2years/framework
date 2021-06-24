@@ -3,15 +3,15 @@
 
 HRESULT player::init()
 {
-	IMAGEMANAGER->addFrameImage("캐릭터기본", "characterIdle.bmp", 1404, 414, 12, 2, true, RGB(255, 0, 255), true);
-	IMAGEMANAGER->addFrameImage("캐릭터무브", "characterMove.bmp", 1476, 402, 12, 2, true, RGB(255, 0, 255), true);
+	IMAGEMANAGER->addFrameImage("캐릭터기본", "KyokoIdle.bmp", 1404, 414, 12, 2, true, RGB(255, 0, 255), true);
+	IMAGEMANAGER->addFrameImage("캐릭터무브", "KyokoMove.bmp", 1476, 402, 12, 2, true, RGB(255, 0, 255), true);
 	IMAGEMANAGER->addFrameImage("쿄코발차기", "KyokoKick.bmp", 9570, 426, 22, 2, true, RGB(255, 0, 255),true);
-	IMAGEMANAGER->addFrameImage("캐릭터달리기", "characterRun.bmp", 2736, 384, 16, 2, true, RGB(255, 0, 255), true);
-	IMAGEMANAGER->addFrameImage("캐릭터콤보1", "characterCombo1.bmp", 1494, 390, 6, 2, true, RGB(255, 0, 255), true);
-	IMAGEMANAGER->addFrameImage("캐릭터콤보2", "characterCombo2.bmp", 1953, 396, 7, 2, true, RGB(255, 0, 255), true);
-	IMAGEMANAGER->addFrameImage("캐릭터콤보3", "characterCombo3.bmp", 4428, 414, 12, 2, true, RGB(255, 0, 255), true);
-	IMAGEMANAGER->addFrameImage("캐릭터강공격", "characterStrongAttack.bmp", 3186, 474, 9, 2, true, RGB(255, 0, 255), true);
-	IMAGEMANAGER->addFrameImage("캐릭터점프", "characterJump.bmp", 405, 420, 3, 2, true, RGB(255, 0, 255), true);
+	IMAGEMANAGER->addFrameImage("캐릭터달리기", "KyokoRun.bmp", 2736, 384, 16, 2, true, RGB(255, 0, 255), true);
+	IMAGEMANAGER->addFrameImage("캐릭터콤보1", "KyokoCombo1.bmp", 1494, 390, 6, 2, true, RGB(255, 0, 255), true);
+	IMAGEMANAGER->addFrameImage("캐릭터콤보2", "KyokoCombo2.bmp", 1953, 396, 7, 2, true, RGB(255, 0, 255), true);
+	IMAGEMANAGER->addFrameImage("캐릭터콤보3", "KyokoCombo3.bmp", 4428, 414, 12, 2, true, RGB(255, 0, 255), true);
+	IMAGEMANAGER->addFrameImage("캐릭터강공격", "KyokoStrongAttack.bmp", 3186, 474, 9, 2, true, RGB(255, 0, 255), true);
+	IMAGEMANAGER->addFrameImage("캐릭터점프", "KyokoJump.bmp", 405, 420, 3, 2, true, RGB(255, 0, 255), true);
 	_player.state = new idleState;
 	_player.state->enter(this);
 	_player.image->setFrameX(0);
@@ -21,7 +21,7 @@ HRESULT player::init()
 	_player.y = 800.0f;
 	_player.z = 0.f;
 	_player.frameX = 0;
-	_player.gravity = 0.5f;
+	_player.gravity = 0.7f;
 	_player.jumpPower = 0.f;
 	_player.time = 0;
 	_player.speed = 0.0f;
@@ -47,7 +47,7 @@ void player::update()
 	if (_player.attackCommandInput > 0)
 		_player.attackCommandInput--;
 	
-	_player.collsionRect = RectMakeCenter(_player.x, _player.y - 105, 110, 210);
+	_player.collsionRect = RectMakeCenter(_player.x, _player.y - 105-_player.z, 110, 210);
 	if (_player.time == 50)
 		_player.time = 1;
 	
@@ -64,9 +64,9 @@ void player::render()
 		_player.frameY);
 }
 
-void player::setAttackRect(float x, float y, float radius)
+void player::setAttackRect(float x, float y)
 {
-
+	
 }
 
 void player::inputHandle()
