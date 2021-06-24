@@ -73,7 +73,6 @@ void player::update()
 
 	if (_player.time == 50)
 		_player.time = 1;
-	
 }
 
 void player::render()

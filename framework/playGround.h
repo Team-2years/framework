@@ -7,8 +7,7 @@
 class playGround : public gameNode
 {
 private:
-	char* _str;
-	int _test;
+
 	player * _player;
 public:
 	playGround();
