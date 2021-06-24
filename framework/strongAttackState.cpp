@@ -5,7 +5,7 @@
 
 state * strongAttackState::inputHandle(player * player)
 {
-	if (player->getFrameX() >= player->getImage()->getMaxFrameX())
+	if (player->getPlayer().frameX >= player->getPlayer().image->getMaxFrameX())
 	{
 		return new idleState;
 	}
@@ -22,9 +22,9 @@ void strongAttackState::enter(player * player)
 
 void strongAttackState::update(player * player)
 {
-	if (player->getTime() % 5 == 4)
+	if (player->getPlayer().time % 5 == 4)
 	{
-		player->setFrameX(player->getFrameX() + 1);
+		player->setFrameX(player->getPlayer().frameX + 1);
 	}
 }
 

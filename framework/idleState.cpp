@@ -5,34 +5,35 @@
 #include "runState.h"
 #include "comboState.h"
 #include "strongAttackState.h"
+#include "jumpState.h"
 #include "player.h"
 
 state * idleState::inputHandle(player * player)
 {
-	if (player->getMoveCommandInput() == 0 && KEYMANAGER->isOnceKeyDown(VK_LEFT))
+	if (player->getPlayer().moveCommandInput == 0 && KEYMANAGER->isStayKeyDown(VK_LEFT))
 	{
 		player->setFrameY(1);
 		player->setSpeed(3.0f);
 		player->setMoveCommandInput(20);
 		return new walkState;
 	}
-	if (player->getMoveCommandInput() == 0 && KEYMANAGER->isOnceKeyDown(VK_RIGHT))
+	if (player->getPlayer().moveCommandInput == 0 && KEYMANAGER->isStayKeyDown(VK_RIGHT))
 	{
 		player->setFrameY(0);
 		player->setSpeed(3.0f);
 		player->setMoveCommandInput(20);
 		return new walkState;
 	}
-	if (player->getMoveCommandInput() > 0 && KEYMANAGER->isOnceKeyDown(VK_LEFT))
+	if (player->getPlayer().moveCommandInput > 0 && KEYMANAGER->isOnceKeyDown(VK_LEFT))
 	{
 		player->setFrameY(1);
-		player->setSpeed(5.0f);
+		player->setSpeed(7.0f);
 		return new runState;
 	}
-	if (player->getMoveCommandInput() > 0 && KEYMANAGER->isOnceKeyDown(VK_RIGHT))
+	if (player->getPlayer().moveCommandInput > 0 && KEYMANAGER->isOnceKeyDown(VK_RIGHT))
 	{
 		player->setFrameY(0);
-		player->setSpeed(5.0f);
+		player->setSpeed(7.0f);
 		return new runState;
 	}
 	if (KEYMANAGER->isOnceKeyDown(VK_UP))
@@ -57,6 +58,10 @@ state * idleState::inputHandle(player * player)
 	{
 		return new strongAttackState;
 	}
+	if (KEYMANAGER->isOnceKeyDown('D'))
+	{
+		return new jumpState;
+	}
 	return nullptr;
 }
 
@@ -70,41 +75,45 @@ void idleState::enter(player * player)
 
 void idleState::update(player * player)
 {
-	if (player->getFrameY() == 0)
+	if (player->getPlayer().frameY == 0)
 	{
-		player->setX(player->getX() + player->getSpeed());
-		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), player->getX(), player->getY());
+		player->setX(player->getPlayer().x + player->getPlayer().speed);
+		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(),
+			player->getPlayer().x,
+			player->getPlayer().y);
 		int r = GetRValue(color);
 		int g = GetGValue(color);
 		int b = GetBValue(color);
 
 		if (!(r == 255 && g == 0 && b == 255))
 		{
-			player->setX(player->getX() - player->getSpeed());
+			player->setX(player->getPlayer().x - player->getPlayer().speed);
 		}
 	}
-	if (player->getFrameY() == 1)
+	if (player->getPlayer().frameY == 1)
 	{
-		player->setX(player->getX() - player->getSpeed());
-		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(), player->getX(), player->getY());
+		player->setX(player->getPlayer().x - player->getPlayer().speed);
+		COLORREF color = GetPixel(IMAGEMANAGER->findImage("배경")->getMemDC(),
+			player->getPlayer().x,
+			player->getPlayer().y);
 		int r = GetRValue(color);
 		int g = GetGValue(color);
 		int b = GetBValue(color);
 
 		if (!(r == 255 && g == 0 && b == 255))
 		{
-			player->setX(player->getX() + player->getSpeed());
+			player->setX(player->getPlayer().x + player->getPlayer().speed);
 		}
 	}
-	if (player->getTime() % 5 == 4)
+	if (player->getPlayer().time % 5 == 4)
 	{
-		player->setFrameX(player->getFrameX() + 1);
-		if (player->getFrameX() >= player->getImage()->getMaxFrameX())
+		player->setFrameX(player->getPlayer().frameX + 1);
+		if (player->getPlayer().frameX > player->getPlayer().image->getMaxFrameX())
 			player->setFrameX(0);
 	}
-	if (player->getTime() % 5 == 0 && player->getSpeed() > 0.f)
+	if (player->getPlayer().speed > 0.f)
 	{
-		player->setSpeed(player->getSpeed() - 0.004f);
+		player->setSpeed(player->getPlayer() .speed - 0.4f);
 	}
 }
 

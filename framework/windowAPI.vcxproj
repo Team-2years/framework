@@ -150,6 +150,7 @@
     <ClInclude Include="action.h" />
     <ClInclude Include="animation.h" />
     <ClInclude Include="comboState.h" />
+    <ClInclude Include="jumpState.h" />
     <ClInclude Include="skillState.h" />
     <ClInclude Include="commonMacroFunction.h" />
     <ClInclude Include="effect.h" />
@@ -184,6 +185,7 @@
     <ClCompile Include="action.cpp" />
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="comboState.cpp" />
+    <ClCompile Include="jumpState.cpp" />
     <ClCompile Include="skillState.cpp" />
     <ClCompile Include="effect.cpp" />
     <ClCompile Include="effectManager.cpp" />

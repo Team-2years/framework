@@ -5,7 +5,7 @@
 
 state * skillState::inputHandle(player * player)
 {
-	if (player->getFrameX() >= player->getImage()->getMaxFrameX())
+	if (player->getPlayer().frameX >= player->getPlayer().image->getMaxFrameX())
 	{
 		return new idleState;
 	}
@@ -22,9 +22,9 @@ void skillState::enter(player * player)
 
 void skillState::update(player * player)
 {
-	if (player->getTime() % 3 == 2)
+	if (player->getPlayer().time % 3 == 2)
 	{
-		player->setFrameX(player->getFrameX() + 1);
+		player->setFrameX(player->getPlayer().frameX + 1);
 	}
 }
 

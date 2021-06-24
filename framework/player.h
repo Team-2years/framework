@@ -1,54 +1,51 @@
 #pragma once
 #include "gameNode.h"
 #include "idleState.h"
+
+
+struct tagPlayer
+{
+	image* image;
+	state* state;
+	RECT collsionRect;
+	RECT attackRect;
+	float x, y, z;
+	float hp;
+	float gravity;
+	float jumpPower;
+	int time;
+	int frameX;
+	int frameY;
+	float speed;
+	int moveCommandInput;
+	int attackCommandInput;
+	int comboCount;
+};
 class player : public gameNode
 {
 private:
-	bool _direction;
-	image* _player;
-	state* _state;
-	bool _isMove;
-	float _x, _y, _z;
-	float _gravity;
-	float _jumpPower;
-	bool _isJump;
-	int _time;
-	bool _cantMove;
-	int _frameX;
-	int _frameY;
-	float _speed;
-	int _moveCommandInput;
-	int _attackCommandInput;
-	int _comboCount;
+	tagPlayer _player;
+	
 public:
 
 	HRESULT init();
 	void release();
 	void update();
 	void render();
-	void setX(float x) { _x = x; }
-	void setY(float y) { _y = y; }
-	void setZ(float z) { _z = z; }
-	void setImage(image * image) { _player = image; }
-	void setFrameX(int x) { _frameX = x; }
-	void setFrameY(int y) { _frameY = y; }
-	void setJumpPower(float power) { _jumpPower = power; }
-	void setTime(int time) { _time = time; }
-	void setSpeed(float speed) { _speed = speed; }
-	void setMoveCommandInput(int input) { _moveCommandInput = input; }
-	void setAttackCommandInput(int input) { _attackCommandInput = input; }
-	void setComboCount(int input) { _comboCount = input; }
-	float getX() { return _x; }
-	float getY() { return _y; }
-	float getZ() { return _z; }
-	int getTime() { return _time; }
-	int getFrameX() { return _frameX; }
-	int getFrameY() { return _frameY; }
-	float getSpeed() { return _speed; }
-	int getMoveCommandInput() { return _moveCommandInput; }
-	int getAttackCommandInput() { return _attackCommandInput; }
-	int getComboCount() { return _comboCount; }
-	image* getImage() { return _player; }
+	void setX(float x) { _player.x = x; }
+	void setY(float y) { _player.y = y; }
+	void setZ(float z) { _player.z = z; }
+	void setImage(image * image) { _player.image = image; }
+	void setFrameX(int x) { _player.frameX = x; }
+	void setFrameY(int y) { _player.frameY = y; }
+	void setJumpPower(float power) { _player.jumpPower = power; }
+	void setTime(int time) { _player.time = time; }
+	void setSpeed(float speed) { _player.speed = speed; }
+	void setMoveCommandInput(int input) { _player.moveCommandInput = input; }
+	void setAttackCommandInput(int input) { _player.attackCommandInput = input; }
+	void setComboCount(int input) { _player.comboCount = input; }
+	void setAttackRect(float x, float y,float radius);
+	tagPlayer getPlayer() { return _player; }
 	void inputHandle();
 };
 

@@ -6,11 +6,14 @@
 
 state * comboState::inputHandle(player * player)
 {
-	if (player->getFrameX() >= player->getImage()->getMaxFrameX())
+	if (player->getPlayer().frameX >= player->getPlayer().image->getMaxFrameX())
 	{
 		return new idleState;
 	}
-	if (player->getComboCount() == 2 && player->getTime() > 24 && player->getTime() < 30 && KEYMANAGER->isOnceKeyDown('S'))
+	if (player->getPlayer().comboCount == 2 &&
+		player->getPlayer().time > 24 && 
+		player->getPlayer().time < 30 &&
+		KEYMANAGER->isOnceKeyDown('S'))
 	{
 		return new strongAttackState;
 	}
@@ -27,14 +30,16 @@ void comboState::enter(player * player)
 
 void comboState::update(player * player)
 {
-	if (player->getTime() % 4 == 1)
+	if (player->getPlayer().time % 4 == 1)
 	{
-		player->setFrameX(player->getFrameX() + 1);
+		player->setFrameX(player->getPlayer().frameX + 1);
 	}
-	switch (player->getComboCount())
+	switch (player->getPlayer().comboCount)
 	{
 	case 0:
-		if (player->getTime() > 7 && player->getTime() < 25 && KEYMANAGER->isOnceKeyDown('A'))
+		if (player->getPlayer().time > 7 &&
+			player->getPlayer().time < 25 &&
+			KEYMANAGER->isOnceKeyDown('A'))
 		{
 			player->setImage(IMAGEMANAGER->findImage("Ä³¸¯ÅÍÄÞº¸2"));
 			player->setFrameX(0);
@@ -43,7 +48,9 @@ void comboState::update(player * player)
 		}
 		break; 
 	case 1:
-		if (player->getTime() > 11 && player->getTime() < 29 && KEYMANAGER->isOnceKeyDown('A'))
+		if (player->getPlayer().time > 11 &&
+			player->getPlayer().time < 29 &&
+			KEYMANAGER->isOnceKeyDown('A'))
 		{
 			player->setImage(IMAGEMANAGER->findImage("Ä³¸¯ÅÍÄÞº¸3"));
 			player->setFrameX(0);
